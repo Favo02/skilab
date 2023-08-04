@@ -1,32 +1,34 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { Button, StyleSheet, View } from 'react-native';
-import * as DataAccess from './DataAccess.js'
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import Map from './components/Map'
+// import * as DataAccess from './DataAccess.js'
 
 
 export default function App() {
   //DataAccess.getSkiAreas().then((res) => console.log(res));
   return (
     <View style={styles.container}>
-      <Button
+      <TouchableOpacity
         style={styles.btn}
         title="Press me"
-        onPress={() => Alert.alert('Simple Button pressed')}
-      />
-      <MapView style={styles.map} />
+        onPress={() => console.log('Simple Button pressed')}
+      >
+        <Text>My button</Text>
+      </TouchableOpacity>
+      <Map style={styles.btn}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'column',
+    flex: 1
   },
   btn: {
-    height: '100px',
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
+    height: 200,
+    marginTop: 100,
+    backgroundColor: 'red'
+  }
 })
