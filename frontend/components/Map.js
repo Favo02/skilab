@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import MapView, { Marker } from "react-native-maps"
-import { StyleSheet, View } from "react-native"
+import MapView, { Marker, Callout } from "react-native-maps"
+import { StyleSheet, View, Text } from "react-native"
 import { getSkiAreas } from "../services/DataAccess.js"
 
 export default function Map() {
@@ -27,11 +27,18 @@ export default function Map() {
       >
         {data.map((p, i) => (
           <Marker
+            title={p.ShortName}
             key={i}
             coordinate={p.GpsPoints.position}
             strokeWidth={2}
             strokeColor="#f00"
-          />
+          >
+            <Callout>
+              <View>
+                <Text>{JSON.stringify(p.Detail)}</Text>
+              </View>
+            </Callout>
+          </Marker>
         ))}
       </MapView>
     </View>
