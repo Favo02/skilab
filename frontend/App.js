@@ -1,34 +1,29 @@
-import React from 'react';
-import MapView from 'react-native-maps';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
-import Map from './components/Map'
-// import * as DataAccess from './DataAccess.js'
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import Map from "./components/Map"
+import Home from "./components/Home"
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  //DataAccess.getSkiAreas().then((res) => console.log(res));
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.btn}
-        title="Press me"
-        onPress={() => console.log('Simple Button pressed')}
-      >
-        <Text>My button</Text>
-      </TouchableOpacity>
-      <Map style={styles.btn}/>
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator>
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    flex: 1
-  },
-  btn: {
-    height: 200,
-    marginTop: 100,
-    backgroundColor: 'red'
-  }
-})
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Home'}}
+        />
+
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{title: 'map'}}
+        />
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
