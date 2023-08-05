@@ -30,9 +30,9 @@ export default function Map() {
   }, [])
 
   // getch accomodations around close to something
-  const getNewData = async (lat, lon, range) => {
+  const getNewData = async (lat, lon) => {
     setAccomodations([])
-    setAccomodations(await getAccomodationNearPoint(lat, lon, range))
+    setAccomodations(await getAccomodationNearPoint(lat, lon))
   }
 
   const handleClick = async (lat, lon) => {
@@ -47,7 +47,7 @@ export default function Map() {
       mapRef.current.animateToRegion(newRegion, 1000)
     }
 
-    getNewData(lat, lon, 5)
+    getNewData(lat, lon)
   }
 
   return (
