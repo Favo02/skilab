@@ -35,6 +35,8 @@ export default function Map({ navigation }) {
   // getch accomodations and parkings around close to something
   const getNewData = async (lat, lon) => {
     setAccomodations([])
+    setParkings([])
+    console.log("init parkings")
 
     navigation.setOptions({ title: 'Ski area details' })
 
@@ -135,7 +137,7 @@ export default function Map({ navigation }) {
         {/* Parkings markers */}
         {parkings.map((p, i) => (
           <Marker
-            title={p.mainaddress}
+            title={p.address}
             key={i}
             coordinate={p.GpsInfo}
             pinColor="#00f"
@@ -152,9 +154,9 @@ export default function Map({ navigation }) {
                   width: SCREEN_WIDTH * 0.7,
                 }}
               >
-                {/*<Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.Type}</Text>*/}
-                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.mainaddress}</Text>
-                {/*<Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Street}</Text>*/}
+                {<Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.location != null ? p.location : ""}</Text>}
+                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.address != null ? p.address : ""}</Text>
+                {<Text style={{ fontSize: 16, textAlign: 'center' }}>{p.capacity != null ? "capacity: " + p.capacity : ""}</Text>}
               </View>
             </Callout>
           </Marker>

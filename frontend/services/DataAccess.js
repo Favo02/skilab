@@ -123,9 +123,14 @@ export async function getParkingNearPoint(latitude, longitude, maxNum = 5) {
   res.data.forEach(e => {
     let distance = computeDistanceFromLongLat(e.scoordinate.x, longitude, e.scoordinate.y, latitude);
     parkings.push({
-      mainaddress: e.smetadata.mainaddress,
+      location: e.smetadata.municipality != null ? e.smetadata.municipality : e.smetadata.autostrada,
+      address: e.smetadata.mainaddress != null ? e.smetadata.mainaddress : e.smetadata.iddirezione,
       municipality: e.smetadata.municipality,
+      mainaddress: e.smetadata.mainaddress,
       Distance: distance,
+      capacity: e.smetadata.capacity,
+      autostrada: e.smetadata.autostrada,
+      iddirezione: e.smetadata.iddirezione,
       GpsInfo: {
         Gpstype: "position",
         Altitude: null,
@@ -134,6 +139,7 @@ export async function getParkingNearPoint(latitude, longitude, maxNum = 5) {
         AltitudeUnitofMeasure: null
       },
     });
+    console.log("capacity: " + e.smetadata.capacity);
   });
   console.log("final number of parkings:", parkings.length);
   parkings.sort((a, b) => a.Distance - b.Distance)
