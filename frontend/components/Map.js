@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import MapView, { Marker, Callout } from "react-native-maps"
-import { StyleSheet, View, Text, Dimensions, Image, ActivityIndicator } from "react-native"
+import { StyleSheet, View, Text, Dimensions, Image, TouchableHighlight } from "react-native"
 import {
   getSkiAreas,
   getAccomodationNearPoint,
@@ -78,18 +78,25 @@ export default function Map({ navigation }) {
               resizeMode="contain"
             />
             <Callout>
-              <View
-                style={{
-                  width: SCREEN_WIDTH * 0.7,
+              <TouchableHighlight
+                onPress={() => {
+                  console.log("Navigating to Location screen with:", p);
+                  navigation.navigate("Location", { location: p });
                 }}
               >
-                <Text
-                  style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}
-                >{p.details.Title}</Text>
-                <Text
-                  style={{ fontSize: 16, textAlign: 'center' }}
-                >{p.details.SubHeader}</Text>
+                <View
+                  style={{
+                    width: SCREEN_WIDTH * 0.7,
+                  }}
+                  >
+                  <Text
+                    style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}
+                    >{p.details.Title}</Text>
+                  <Text
+                    style={{ fontSize: 16, textAlign: 'center' }}
+                    >{p.details.SubHeader}</Text>
               </View>
+              </TouchableHighlight>
             </Callout>
           </Marker>
         ))}
