@@ -19,7 +19,7 @@ export default function App() {
         <Stack.Screen
           name="Map"
           component={Map}
-          options={{ title: "Points of interest" }}
+          options={{ title: "Tap on a ski area for more..." }}
         />
       </Stack.Navigator>
     </NavigationContainer>
