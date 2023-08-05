@@ -76,7 +76,7 @@ function Home({ navigation }) {
         contentContainerStyle={{ paddingVertical: 250 }}
         data={dataList}
         renderItem={renderItem}
-        keyExtractor={(item, index) => item}
+        keyExtractor={(item, index) => `${item}-${index}`}
         contentInsetAdjustmentBehavior="never"
         snapToAlignment="center"
         decelerationRate="fast"
