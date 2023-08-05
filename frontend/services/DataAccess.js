@@ -14,7 +14,7 @@ export async function getSkiAreas() {
 }
 
 // get accomodations near something
-export async function getAccomodationNearPoint(latitude, longitude, radius = 10000) {
+export async function getAccomodationNearPoint(latitude, longitude, radius = 5000) {
   const pageSize = 1000
   const pageNumber = 1
 

@@ -15,7 +15,7 @@ const INITIAL_REGION = {
 
 const SCREEN_WIDTH = Dimensions.get("window").width
 
-export default function Map() {
+export default function Map({ navigation }) {
   const mapRef = useRef(null)
 
   const [skiAreas, setSkiAreas] = useState([])
@@ -33,7 +33,10 @@ export default function Map() {
   // getch accomodations around close to something
   const getNewData = async (lat, lon) => {
     setAccomodations([])
-    setAccomodations(await getAccomodationNearPoint(lat, lon, 10000))
+
+    navigation.setOptions({ title: 'Ski area details' })
+
+    setAccomodations(await getAccomodationNearPoint(lat, lon))
   }
 
   const handleClick = async (lat, lon) => {
