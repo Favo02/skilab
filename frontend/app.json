@@ -18,6 +18,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "it.silab.skilab",
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-256.png",
         "backgroundColor": "#ffffff"

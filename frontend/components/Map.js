@@ -34,7 +34,9 @@ export default function Map({ navigation }) {
 
   // getch accomodations and parkings around close to something
   const getNewData = async (lat, lon) => {
-    setAccomodations([])
+    //setAccomodations([])
+    //setSkiAreas([])
+    //setParkings([])
 
     navigation.setOptions({ title: 'Ski area details' })
 
@@ -77,16 +79,12 @@ export default function Map({ navigation }) {
           >
             <Image
               source={require("../assets/ski.png")}
-              style={{ width: 34, height: 34 }}
+              style={{ width: 24, height: 24 }}
               resizeMode="contain"
             />
-            <Callout>
-              <TouchableHighlight
-                onPress={() => {
-                  console.log("Navigating to Location screen with:", p);
+            <Callout onPress={() => {
                   navigation.navigate("Location", { location: p });
-                }}
-              >
+                }}>
                 <View
                   style={{
                     width: SCREEN_WIDTH * 0.7,
@@ -99,38 +97,39 @@ export default function Map({ navigation }) {
                     style={{ fontSize: 16, textAlign: 'center' }}
                   >{p.details.SubHeader}</Text>
                 </View>
-              </TouchableHighlight>
             </Callout>
           </Marker>
         ))}
 
         {/* Accomodation markers */}
-        {accomodations.map((p, i) => (
-          <Marker
-            title={p.ShortName}
-            key={i}
-            coordinate={p.GpsPoints.position}
-            pinColor="#00f"
-            tracksViewChanges={false}
-          >
-            <Image
+        {accomodations.map((p, i) => {
+          return (
+            <Marker
+              title={p.ShortName}
+              key={i}
+              coordinate={p.GpsPoints.position}
+              pinColor="#00f"
+              tracksViewChanges={true}
+            >
+              <Image
               source={require('../assets/bed.png')}
-              style={{ width: 26, height: 28 }}
+              style={{ width: 22, height: 26 }}
               resizeMode="contain"
             />
-            <Callout>
-              <View
-                style={{
-                  width: SCREEN_WIDTH * 0.7,
-                }}
-              >
-                <Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.Type}</Text>
-                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Name}</Text>
-                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Street}</Text>
-              </View>
-            </Callout>
-          </Marker>
-        ))}
+              <Callout>
+                <View
+                  style={{
+                    width: SCREEN_WIDTH * 0.7,
+                  }}
+                >
+                  <Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.Type}</Text>
+                  <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Name}</Text>
+                  <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Street}</Text>
+                </View>
+              </Callout>
+            </Marker>
+          )
+        })}
 
         {/* Parkings markers */}
         {parkings.map((p, i) => (
@@ -139,7 +138,7 @@ export default function Map({ navigation }) {
             key={i}
             coordinate={p.GpsInfo}
             pinColor="#00f"
-            tracksViewChanges={false}
+            tracksViewChanges={true}
           >
             <Image
               source={require('../assets/parking.png')}
