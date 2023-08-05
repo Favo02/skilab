@@ -11,7 +11,7 @@ export async function getSkiAreas() {
       AltitudeFrom: e.AltitudeFrom,
       AltitudeTo: e.AltitudeTo,
       AltitudeUnitofMeasure: e.AltitudeUnitofMeasure,
-      Detail: e.Detail,
+      Detail: e.Detail.en,
       GpsPoints: {
         position: {
           Gpstype: e.GpsPoints.position.Gpstype,

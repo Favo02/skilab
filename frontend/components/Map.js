@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import MapView, { Marker, Callout } from "react-native-maps"
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, Dimensions, Image } from "react-native"
 import {
   getSkiAreas,
   getAccomodationNearPoint,
@@ -12,6 +12,8 @@ const INITIAL_REGION = {
   latitudeDelta: 2,
   longitudeDelta: 2,
 }
+
+const SCREEN_WIDTH = Dimensions.get('window').width
 
 export default function Map() {
 
@@ -71,10 +73,17 @@ export default function Map() {
               )
             }
           >
+            <Image
+              source={require('../assets/ski.png')}
+              style={{width: 30, height: 30}}
+              resizeMode="contain"
+            />
             <Callout>
-              <View>
-                <Text>{JSON.stringify(p.GpsPoints.position)}</Text>
-                <Text>{JSON.stringify(p.Detail)}</Text>
+              <View style={{
+                width: SCREEN_WIDTH * 0.7
+              }}>
+                <Text>{p.Detail.Title}</Text>
+                <Text>{p.Detail.SubHeader}</Text>
               </View>
             </Callout>
           </Marker>
@@ -87,7 +96,14 @@ export default function Map() {
             key={i}
             coordinate={p.GpsPoints.position}
             pinColor="#00f"
-          />
+            tracksViewChanges={false}
+          >
+            <Image
+              source={require('../assets/bed.png')}
+              style={{width: 26, height: 28}}
+              resizeMode="contain"
+            />
+          </Marker>
         ))}
       </MapView>
     </View>
