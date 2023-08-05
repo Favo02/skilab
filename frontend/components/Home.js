@@ -8,6 +8,10 @@ function Home({ navigation }) {
     {
       name : "Ski Area Map",
       target : "Map"
+    },
+    {
+      name : "Ski Area Detail",
+      target : "Location"
     }
   ]
 
