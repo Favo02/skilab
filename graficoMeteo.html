@@ -1,0 +1,122 @@
+<html lang="en">
+  <head>
+    <title>Chart.js example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> 
+  </head>
+  <body>
+    ciao
+    <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+    <!-- <div style="width: 800px;"><canvas id="acquisitions"></canvas></div> -->
+
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+        var massima = [31, 28, 30, 27, 26, 30, 27];
+        var minima = [23, 18, 19, 21, 21, 20, 20];
+        var media = Array.apply(null, Array(massima.length)).map(function () {});
+
+        for (var i = 0; i < media.length; i++ ) 
+            media[i] =( massima[i] + minima[i]) / 2;
+        
+      
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['trePrima', 'duePrima', 'unoPrima', 'oggi', 'domani', 'dopodomani', 'treDopo'],
+            datasets: [
+                {
+              label: 'massima',
+              data: massima,
+              borderWidth: 1,
+              borderColor: "#ff0000",
+              
+            },    
+            {
+                label: 'media',
+                data: media,
+                borderWidth: 1,
+                borderDash: [5, 5],
+                borderColor: "#ff8000",
+                
+            }, 
+            {
+                label: 'minima',
+                data: minima,
+                borderWidth: 1,
+                borderColor: "#00bfff",
+
+            }
+
+        ]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+
+
+      <!-- <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+       var myChart = new Chart(ctx, {
+           type: 'line',
+           data: {
+             labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+             datasets: [{ 
+                 data: [86,114,106,106,107,111,133],
+                 label: "Total",
+                 borderColor: "#3e95cd",
+                 backgroundColor: "#7bb6dd",
+                 fill: False,
+               }, { 
+                 data: [70,90,44,60,83,90,100],
+                 label: "Accepted",
+                 borderColor: "#3cba9f",
+                 backgroundColor: "#71d1bd",
+                 fill: False,
+               }, { 
+                 data: [10,21,60,44,17,21,17],
+                 label: "Pending",
+                 borderColor: "#ffa500",
+                 backgroundColor:"#ffc04d",
+                 fill: False,
+               }, { 
+                 data: [6,3,2,2,7,0,16],
+                 label: "Rejected",
+                 borderColor: "#c45850",
+                 backgroundColor:"#d78f89",
+                 fill: False,
+               }
+             ]
+           },
+         });
+     </script> -->
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
+
+
+
+
