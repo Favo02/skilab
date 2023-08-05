@@ -4,6 +4,13 @@ import { View, Text, FlatList, Animated, TouchableOpacity } from "react-native"
 
 function Home({ navigation }) {
 
+  const dataList = [
+    {
+      name : "Ski Area Map",
+      target : "Map"
+    }
+  ]
+
   const [scrollViewWidth, setScrollViewWidth] = useState(0)
 
   const boxWidth = scrollViewWidth * 0.8
@@ -12,7 +19,7 @@ function Home({ navigation }) {
   const pan = React.useRef(new Animated.ValueXY()).current
 
   const renderItem = ({ item, index }) => (
-    <TouchableOpacity onPress={() => navigation.navigate('Map')}>
+    <TouchableOpacity onPress={() => navigation.navigate(item.target)}>
       <Animated.View
         style={{
           transform: [
@@ -45,11 +52,13 @@ function Home({ navigation }) {
           <Text
             style={{
               textAlign: 'center',
-              fontSize: 30,
+              position: 'absolute',
+              top:85,
+              fontSize: 25,
               fontWeight: 900,
               color: '#fff'
             }}
-          >{item}</Text>
+          >{item.name}</Text>
         </View>
       </Animated.View>
     </TouchableOpacity>
@@ -60,10 +69,10 @@ function Home({ navigation }) {
       <FlatList
         horizontal
         style={{ backgroundColor: "#6b6b6b", height: 10 }}
-        contentContainerStyle={{ paddingVertical: 16 }}
-        data={["Skiing locations", 2]}
+        contentContainerStyle={{ paddingVertical: 250 }}
+        data={dataList}
         renderItem={renderItem}
-        keyExtractor={(item, index) => `${index}-${item}`}
+        keyExtractor={(item, index) => item}
         contentInsetAdjustmentBehavior="never"
         snapToAlignment="center"
         decelerationRate="fast"
