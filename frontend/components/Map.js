@@ -105,6 +105,17 @@ export default function Map() {
               style={{width: 26, height: 28}}
               resizeMode="contain"
             />
+            <Callout>
+              <View
+                style={{
+                  width: SCREEN_WIDTH * 0.7,
+                }}
+              >
+                <Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.Type}</Text>
+                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Name}</Text>
+                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Street}</Text>
+              </View>
+            </Callout>
           </Marker>
         ))}
       </MapView>

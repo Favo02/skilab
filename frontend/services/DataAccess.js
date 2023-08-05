@@ -56,8 +56,8 @@ export async function getAccomodationNearPoint(latitude, longitude, radius = 100
         },
       },
       IsCamping: e.IsCamping,
-      AccoDetail: e.AccoDetail,
-      AccoTypeId: e.AccoTypeId,
+      AccoDetail: e.AccoDetail.en,
+      Type: e.AccoType.Id,
       ImageGallery: e.ImageGallery,
       LocationInfo: e.LocationInfo,
     })
