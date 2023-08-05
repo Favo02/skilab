@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Dimensions, Image, TouchableHighlight } from "r
 import {
   getSkiAreas,
   getAccomodationNearPoint,
+  getParkingNearPoint,
 } from "../services/DataAccess.js"
 
 const INITIAL_REGION = {
@@ -20,6 +21,7 @@ export default function Map({ navigation }) {
 
   const [skiAreas, setSkiAreas] = useState([])
   const [accomodations, setAccomodations] = useState([])
+  const [parkings, setParkings] = useState([])
 
   // fetch skyAreas
   useEffect(() => {
@@ -30,13 +32,14 @@ export default function Map({ navigation }) {
     getData()
   }, [])
 
-  // getch accomodations around close to something
+  // getch accomodations and parkings around close to something
   const getNewData = async (lat, lon) => {
     setAccomodations([])
 
     navigation.setOptions({ title: 'Ski area details' })
 
     setAccomodations(await getAccomodationNearPoint(lat, lon))
+    setParkings(await getParkingNearPoint(lat, lon))
   }
 
   const handleClick = async (lat, lon) => {
@@ -88,14 +91,14 @@ export default function Map({ navigation }) {
                   style={{
                     width: SCREEN_WIDTH * 0.7,
                   }}
-                  >
+                >
                   <Text
                     style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}
-                    >{p.details.Title}</Text>
+                  >{p.details.Title}</Text>
                   <Text
                     style={{ fontSize: 16, textAlign: 'center' }}
-                    >{p.details.SubHeader}</Text>
-              </View>
+                  >{p.details.SubHeader}</Text>
+                </View>
               </TouchableHighlight>
             </Callout>
           </Marker>
@@ -112,7 +115,7 @@ export default function Map({ navigation }) {
           >
             <Image
               source={require('../assets/bed.png')}
-              style={{width: 26, height: 28}}
+              style={{ width: 26, height: 28 }}
               resizeMode="contain"
             />
             <Callout>
@@ -124,6 +127,34 @@ export default function Map({ navigation }) {
                 <Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.Type}</Text>
                 <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Name}</Text>
                 <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Street}</Text>
+              </View>
+            </Callout>
+          </Marker>
+        ))}
+
+        {/* Parkings markers */}
+        {parkings.map((p, i) => (
+          <Marker
+            title={p.mainaddress}
+            key={i}
+            coordinate={p.GpsInfo}
+            pinColor="#00f"
+            tracksViewChanges={false}
+          >
+            <Image
+              source={require('../assets/parking.png')}
+              style={{ width: 26, height: 28 }}
+              resizeMode="contain"
+            />
+            <Callout>
+              <View
+                style={{
+                  width: SCREEN_WIDTH * 0.7,
+                }}
+              >
+                {/*<Text style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}>{p.Type}</Text>*/}
+                <Text style={{ fontSize: 16, textAlign: 'center' }}>{p.mainaddress}</Text>
+                {/*<Text style={{ fontSize: 16, textAlign: 'center' }}>{p.AccoDetail.Street}</Text>*/}
               </View>
             </Callout>
           </Marker>
