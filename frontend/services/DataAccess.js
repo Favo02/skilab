@@ -20,15 +20,15 @@ export async function getAccomodationNearPoint(latitude, longitude, radius = 100
 
   let res = await fetch(
     "https://tourism.opendatahub.com/v1/Accommodation?pagenumber=" +
-      pageNumber +
-      "&pagesize=" +
-      pageSize +
-      "&roominfo=1-18,18&bokfilter=hgv&msssource=sinfo&availabilitychecklanguage=en&detail=0&latitude=" +
-      latitude +
-      "&longitude=" +
-      longitude +
-      "&removenullvalues=false&radius=" +
-      radius
+    pageNumber +
+    "&pagesize=" +
+    pageSize +
+    "&roominfo=1-18,18&bokfilter=hgv&msssource=sinfo&availabilitychecklanguage=en&detail=0&latitude=" +
+    latitude +
+    "&longitude=" +
+    longitude +
+    "&removenullvalues=false&radius=" +
+    radius
   )
   res = await res.json()
 
@@ -36,9 +36,9 @@ export async function getAccomodationNearPoint(latitude, longitude, radius = 100
   res.Items.forEach((e) => {
     let distance =
       (e.GpsPoints.position.Longitude - longitude) *
-        (e.GpsPoints.position.Longitude - longitude) +
+      (e.GpsPoints.position.Longitude - longitude) +
       (e.GpsPoints.position.Latitude - latitude) *
-        (e.GpsPoints.position.Latitude - latitude)
+      (e.GpsPoints.position.Latitude - latitude)
     accomodations.push({
       Id: e.Id,
       Distance: distance,
@@ -64,4 +64,33 @@ export async function getAccomodationNearPoint(latitude, longitude, radius = 100
   })
   accomodations.sort((a, b) => a.Distance - b.Distance)
   return accomodations
+}
+
+
+//get parking spots in a radius
+export async function getParkingNearPoint(latitude, longitude, radius = 10000) {
+  const pageSize = 1000
+  const pageNumber = 1
+
+  let res = await fetch(
+    "https://tourism.opendatahub.com/v1/ODHActivityPoi?" +
+    "pagenumber=" + pageNumber +
+    "&pagesize=" + pageSize +
+    "&type=255&latitude=" + latitude +
+    "&longitude=" + longitude +
+    "&radius=" + radius +
+    "&removenullvalues=false"
+  )
+  res = await res.json()
+
+  let parkings = []
+  res.forEach(e => {
+    if (e.Details.en.ParkingInfo) {
+      parkings.push({
+        Title: e.Detail.Title,
+        GpsInfo: e.GpsInfo[0],
+      });
+    }
+  });
+  return parkings
 }
