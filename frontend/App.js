@@ -7,27 +7,38 @@ import * as DataAccess from './services/DataAccess.js';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
-  DataAccess.getAccomodationNearPoint(46.685657, 11.725011, 5).then((res) => res.forEach(e => {
-    console.log(e.Distance)
-  }));
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
 
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: 'Home' }}
-        />
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-        <Stack.Screen
-          name="Map"
-          component={Map}
-          options={{ title: 'map' }}
-        />
+    this.state = {
+      data: '',
+    };
+  }
 
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+  render() {
+    DataAccess.getAccomodationNearPoint(46.685657, 11.725011, 5).then((res) => res.forEach(e => {
+      console.log(e.Distance)
+    }));
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ title: 'Home' }}
+          />
+
+          <Stack.Screen
+            name="Map"
+            component={Map}
+            options={{ title: 'map' }}
+          />
+
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
