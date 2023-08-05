@@ -9,10 +9,10 @@ function Home({ navigation }) {
       name : "Ski Area Map",
       target : "Map"
     },
-    {
-      name : "Ski Area Detail",
-      target : "Location"
-    }
+    // {
+    //   name : "Ski Area Detail",
+    //   target : "Location"
+    // }
   ]
 
   const [scrollViewWidth, setScrollViewWidth] = useState(0)
@@ -72,7 +72,7 @@ function Home({ navigation }) {
     <View style={{ flex: 1 }}>
       <FlatList
         horizontal
-        style={{ backgroundColor: "#6b6b6b", height: 10 }}
+        style={{ backgroundColor: "#ffffff", height: 10, paddingLeft: 40}}
         contentContainerStyle={{ paddingVertical: 250 }}
         data={dataList}
         renderItem={renderItem}

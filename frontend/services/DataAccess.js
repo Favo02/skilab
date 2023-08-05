@@ -15,7 +15,8 @@ export async function getSkiAreas() {
     position: {
       longitude: e.GpsPoints.position.Longitude,
       latitude: e.GpsPoints.position.Latitude,
-    }
+    },
+    logoUrl: e.ContactInfos.en.LogoUrl
   }))
 }
 

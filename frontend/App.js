@@ -1,5 +1,5 @@
 import * as React from "react"
-import { NavigationContainer } from "@react-navigation/native"
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native"
 import Map from "./components/Map"
 import Home from "./components/Home"
 import Location from "./components/Location"
@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"

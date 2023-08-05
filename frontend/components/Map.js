@@ -34,12 +34,9 @@ export default function Map({ navigation }) {
 
   // getch accomodations and parkings around close to something
   const getNewData = async (lat, lon) => {
-<<<<<<< HEAD
     //setAccomodations([])
     //setSkiAreas([])
     //setParkings([])
-=======
->>>>>>> fae6a02be806c0aa07194e99018553fbbb3aebef
 
     navigation.setOptions({ title: 'Ski area details' })
 
