@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import MapView, { Marker, Callout } from "react-native-maps"
-import { StyleSheet, View, Text, Dimensions, Image } from "react-native"
+import { StyleSheet, View, Text, Dimensions, Image, ActivityIndicator } from "react-native"
 import {
   getSkiAreas,
   getAccomodationNearPoint,
@@ -13,19 +13,18 @@ const INITIAL_REGION = {
   longitudeDelta: 2,
 }
 
-const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_WIDTH = Dimensions.get("window").width
 
 export default function Map() {
-
   const mapRef = useRef(null)
 
-  const [skyAreas, setSkyAreas] = useState([])
+  const [skiAreas, setSkiAreas] = useState([])
   const [accomodations, setAccomodations] = useState([])
 
   // fetch skyAreas
   useEffect(() => {
     const getData = async () => {
-      setSkyAreas(await getSkiAreas())
+      setSkiAreas(await getSkiAreas())
     }
 
     getData()
@@ -34,7 +33,7 @@ export default function Map() {
   // getch accomodations around close to something
   const getNewData = async (lat, lon) => {
     setAccomodations([])
-    setAccomodations(await getAccomodationNearPoint(lat, lon))
+    setAccomodations(await getAccomodationNearPoint(lat, lon, 10000))
   }
 
   const handleClick = async (lat, lon) => {
@@ -54,36 +53,39 @@ export default function Map() {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={INITIAL_REGION}
-        ref={mapRef}
-      >
+      <MapView style={styles.map} initialRegion={INITIAL_REGION} ref={mapRef}>
+
         {/* Sky areas markers */}
-        {skyAreas.map((p, i) => (
+        {skiAreas.map((p, i) => (
           <Marker
-            title={p.ShortName}
+            title={p.title}
             key={i}
-            coordinate={p.GpsPoints.position}
+            coordinate={p.position}
             pinColor="#f00"
             onPress={() =>
               handleClick(
-                p.GpsPoints.position.latitude,
-                p.GpsPoints.position.longitude
+                p.position.latitude,
+                p.position.longitude
               )
             }
           >
             <Image
-              source={require('../assets/ski.png')}
-              style={{width: 30, height: 30}}
+              source={require("../assets/ski.png")}
+              style={{ width: 34, height: 34 }}
               resizeMode="contain"
             />
             <Callout>
-              <View style={{
-                width: SCREEN_WIDTH * 0.7
-              }}>
-                <Text>{p.Detail.Title}</Text>
-                <Text>{p.Detail.SubHeader}</Text>
+              <View
+                style={{
+                  width: SCREEN_WIDTH * 0.7,
+                }}
+              >
+                <Text
+                  style={{ fontSize: 20, fontWeight: 900, textAlign: 'center' }}
+                >{p.details.Title}</Text>
+                <Text
+                  style={{ fontSize: 16, textAlign: 'center' }}
+                >{p.details.SubHeader}</Text>
               </View>
             </Callout>
           </Marker>
