@@ -100,6 +100,9 @@ export default function Map({ navigation }) {
                   <Text
                     style={{ fontSize: 16, textAlign: 'center' }}
                   >{p.details.SubHeader}</Text>
+                  <Text
+                    style={{ fontSize: 16, textAlign: 'center' }}
+                  >{p.AltitudeFrom != null && p.AltitudeTo != null ? "Altitude: " + p.AltitudeFrom + " - " + p.AltitudeTo : ""}</Text>
                 </View>
               </TouchableHighlight>
             </Callout>

@@ -10,6 +10,8 @@ export async function getSkiAreas() {
   return res.map(e => ({
     title: e.ShortName,
     details: e.Detail.en,
+    AltitudeFrom: e.AltitudeFrom,
+    AltitudeTo: e.AltitudeTo,
     position: {
       longitude: e.GpsPoints.position.Longitude,
       latitude: e.GpsPoints.position.Latitude,
