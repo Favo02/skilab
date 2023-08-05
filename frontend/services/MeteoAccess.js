@@ -14,3 +14,9 @@ export async function getRealtimeWeatherByGPS(lat, lon) {
   
 }
   
+
+export async function getWeatherHistoryByGPS(lat, lom) {
+    let res = await fetch(`https://tourism.opendatahub.com/v1/WeatherHistory?pagenumber=1&datefrom=08-01-2023&dateto=08-15-2023&latitude=${lat}&longitude=${lon}&removenullvalues=false`)
+
+    res = await res.json();
+}
